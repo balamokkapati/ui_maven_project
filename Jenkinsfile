@@ -34,7 +34,7 @@ pipeline {
           stage('Deploy to Test'){
                steps {
               echo 'Deploying to Test Environment'
-              echo "${env.BUILD_ID}"
+              echo '${env.BUILD_ID}'
               }
           }
          }
