@@ -18,10 +18,11 @@ pipeline {
             }
 
           stage('Deploy Artifacts'){
+                steps {
               echo 'Deploy snapshots to artifactory repository'
               archiveArtifacts 'target/*.jar'
               }
-         
+          }
           stage('Deploy to Dev'){
                steps {
               echo 'Deploying artifactory to Dev environment'
