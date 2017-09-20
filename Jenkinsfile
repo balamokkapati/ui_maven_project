@@ -1,7 +1,5 @@
-pipeline {
-  node
-   stages{
-   
+node{
+    
       stage('Clone the Source Code') {
        echo 'cloning..'
        git credentialsId: 'github-credential', url: 'https://github.com/Chariotern/ui_maven_project.git'
@@ -29,5 +27,5 @@ pipeline {
           echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
       }
    
-  }  
+
 }
