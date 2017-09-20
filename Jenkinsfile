@@ -19,12 +19,14 @@ pipeline {
       }
       stage('Deploy to Dev'){
           echo 'Deploying artifactory to Dev environment'
+          echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
       }
    
    //input 'Approval is require to push to Next Environment'
 
       stage('Deploy to Test'){
           echo 'Deploying to Test Environment'
+          echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
       }
    
   }  
