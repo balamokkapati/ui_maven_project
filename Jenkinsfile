@@ -25,7 +25,7 @@ pipeline {
    //input 'Approval is require to push to Next Environment'
           stage('Deploy to Test'){
               echo 'Deploying to Test Environment'
-              echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+              echo "${env.BUILD_ID}"
               }
          }
       post { 
