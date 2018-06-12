@@ -4,7 +4,7 @@ pipeline {
           stage('Clone the Source Code') {
                steps {
                  echo 'cloning..'
-                 git credentialsId: 'github-credential', url: 'https://github.com/Chariotern/ui_maven_project.git'
+                 git credentialsId: 'github', url: 'https://github.com/Chariotern/ui_maven_project.git'
             }
            
           }
