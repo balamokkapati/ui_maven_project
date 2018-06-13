@@ -1,47 +1,35 @@
 pipeline {
-     agent any
-     stages {
-          stage('Clone the Source Code') {
-               steps {
-                 echo 'cloning..'
-                 git credentialsId: 'github-credential', url: 'https://github.com/Chariotern/ui_maven_project.git'
+    agent any 
+    stages {
+        stage('Code Checkout') { 
+            steps {
+                // Provide git url to checkout using pipeline syntax.
+              git credentialsId: 'Github', url: 'https://github.com/yegendhar/indianteam.git'
             }
-           
-          }
-         
-          stage('Compile & Package & Unit Test'){
-               steps {
-                    echo 'compiling the source code and package'
-                    echo 'Run unit test cases against the compiled source code'
-                    sh 'mvn clean compile package'
-                    }
-            }
-
-          stage('Deploy Artifacts'){
-                steps {
-              echo 'Deploy snapshots to artifactory repository'
-              archiveArtifacts 'target/*.jar'
-              }
-          }
-          stage('Deploy to Dev'){
-               steps {
-              echo 'Deploying artifactory to Dev environment'
-              echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-              }
-          }
-   
-   //input 'Approval is require to push to Next Environment'
-          stage('Deploy to Test'){
-               steps {
-              echo 'Deploying to Test Environment'
-              echo '${env.BUILD_ID}'
-              }
-          }
-         }
-      post { 
-        always { 
-            echo 'I will always say Hello again!'
         }
-      }
-    
+        stage('Build') { 
+            steps {
+                // Build using maven project
+                  sh 'mvn clean compile' 
+            }
+        }
+        stage('Test') { 
+            steps {
+                //Test execution through maven
+                sh 'mvn test'  
+            }
+        }
+        stage('Local Archive') { 
+            steps {
+                //
+             sh 'mvn install'  
+            }
+        }
+        stage('Deploy to Dev') { 
+            steps {
+                //
+             sh 'mvn install'  
+            }
+        }
+    }
 }
